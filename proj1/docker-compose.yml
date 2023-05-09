@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  nginx-8.0:
+    build:
+      context: ./docker/nginx
+      dockerfile: development/Dockerfile
+    container_name: nginx-8.0
+    volumes:
+      - ./public:/app/public
+    networks:
+      - onenet
+      - backend
+
+  php-fpm:
+    build:
+      context: docker/php-fpm
+      dockerfile: development/Dockerfile
+    container_name: php-fpm-8.0
+    networks:
+      - backend
+    volumes:
+      - ./public:/app/public
+
+networks:
+  onenet:
+    name: onenet
+    external: true
+  backend:
+    driver: bridge

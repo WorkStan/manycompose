@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  api-nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: development/Dockerfile
+    container_name: api-nginx
+    ports:
+      - 80:80
+    networks:
+      - onenet
+
+networks:
+  onenet:
+    name: onenet
+    external: true
